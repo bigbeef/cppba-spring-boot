@@ -1,0 +1,9 @@
+server:
+    port: 8080
+    address: localhost
+
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/cppba
+        username: root
+        password: root
