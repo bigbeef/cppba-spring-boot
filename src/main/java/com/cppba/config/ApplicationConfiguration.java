@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-public class DatabaseConfiguration implements EnvironmentAware {
+public class ApplicationConfiguration implements EnvironmentAware {
 
     private Environment environment;
     private RelaxedPropertyResolver datasourcePropertyResolver;
