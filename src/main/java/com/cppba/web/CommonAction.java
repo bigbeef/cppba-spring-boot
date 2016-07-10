@@ -25,8 +25,7 @@ public class CommonAction {
         Session session = sessionFactory.getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery("select * from user");
         List list = sqlQuery.list();
-        System.out.println(12345);
-        System.out.printf(list.size()+"");
+        System.out.println(list.size()+"");
         try {
             response.setContentType("application/json");
             response.setHeader("Cache-Control", "no-cache");
