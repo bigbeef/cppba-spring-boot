@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -33,5 +34,13 @@ public class CommonAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping("test1")
+    public ModelAndView test1(HttpServletResponse response){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("index.jsp");
+        mv.addObject("msg","返回成功");
+       return mv;
     }
 }
