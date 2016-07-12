@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <version>1.0.0</version>
 
-    <name>cppba-spring-boot Maven Webapp</name>
+    <name>cppba-spring-boot</name>
     <url>http://maven.apache.org</url>
 
     <parent>
@@ -22,7 +22,7 @@
         <spring.version>4.3.0.RELEASE</spring.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
     </properties>
-
+    
     <dependencies>
         <!--spring-->
         <dependency>
@@ -72,6 +72,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>

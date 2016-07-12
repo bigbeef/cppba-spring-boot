@@ -13,6 +13,7 @@ public class TestFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         System.out.println("TestFilter");
+        filterChain.doFilter(servletRequest,servletResponse);
     }
 
     @Override

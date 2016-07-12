@@ -39,6 +39,7 @@ public class CommonAction {
     @RequestMapping("test1")
     public ModelAndView test1(HttpServletResponse response){
         ModelAndView mv = new ModelAndView();
+        System.out.println(12345678);
         mv.setViewName("index.jsp");
         mv.addObject("msg","返回成功");
        return mv;
