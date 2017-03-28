@@ -3,7 +3,7 @@ package com.cppba.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.cppba.filter.TestFilter;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -89,7 +89,6 @@ public class ApplicationConfiguration implements EnvironmentAware {
 
     @Bean
     public FilterRegistrationBean testFilterRegistration() {
-
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new TestFilter());
         registration.addUrlPatterns("/*");
