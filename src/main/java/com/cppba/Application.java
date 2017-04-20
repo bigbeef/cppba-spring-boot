@@ -2,15 +2,15 @@ package com.cppba;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.env.Environment;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 import java.net.UnknownHostException;
 
 // same as @Configuration @EnableAutoConfiguration @ComponentScan
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.cppba")
+@ServletComponentScan
 public class Application {
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(Application.class);
-        Environment environment = app.run(args).getEnvironment();
+        SpringApplication.run(Application.class, args);
     }
 }

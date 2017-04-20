@@ -1,16 +1,14 @@
 package com.cppba.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.cppba.filter.TestFilter;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 
@@ -85,16 +83,5 @@ public class ApplicationConfiguration implements EnvironmentAware {
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
         hibernateTransactionManager.setSessionFactory(sessionFactory().getObject());
         return hibernateTransactionManager;
-    }
-
-    @Bean
-    public FilterRegistrationBean testFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new TestFilter());
-        registration.addUrlPatterns("/*");
-        registration.addInitParameter("paramName", "paramValue");
-        registration.setName("testFilter");
-        registration.setOrder(1);
-        return registration;
     }
 }

@@ -22,6 +22,7 @@ public class TestController {
     @RequestMapping("/test")
     @ResponseBody
     public Map test(HttpServletResponse response){
+        System.out.println(123);
         testService.query();
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("msg","调用成功");
@@ -32,7 +33,7 @@ public class TestController {
     public ModelAndView test1(HttpServletResponse response){
         ModelAndView mv = new ModelAndView();
         System.out.println(12345678);
-        mv.setViewName("/index.jsp");
+        mv.setViewName("index");
         mv.addObject("msg","返回成功");
        return mv;
     }
