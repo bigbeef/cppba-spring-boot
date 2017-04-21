@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 
 // same as @Configuration @EnableAutoConfiguration @ComponentScan
 @SpringBootApplication(scanBasePackages = "com.cppba")
+//WebFilter,WebServlet,WebListener
 @ServletComponentScan
 public class Application {
     public static void main(String[] args) throws UnknownHostException {
