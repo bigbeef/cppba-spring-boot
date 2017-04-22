@@ -1,11 +1,25 @@
 package com.cppba.base.dao.impl;
 
 import com.cppba.base.dao.BaseRepository;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * 开发者
+ * nickName:大黄蜂
+ * email:245655812@qq.com
+ * github:https://github.com/bigbeef
+ */
 public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T,ID>
         implements BaseRepository<T,ID> {
 
@@ -16,38 +30,67 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
         this.em = em;
     }
 
-    /*public int executeUpdate(String hql){
+    public int executeUpdate(String hql){
         Query query = em.createQuery(hql);
         return query.executeUpdate();
     }
 
+    public List<T> findByHql(final String hql){
+        return findByHql(hql,null);
+    }
+
     public List<T> findByHql(final String hql, final Map params) {
-        List<Object> list = null;
-        Query query = em.createQuery(hql);
-        if (params != null && params.size() > 0) {
-            for (Object key : params.keySet()) {
-                query.setParameter(key.toString(), params.get(key));
-            }
-        }
-        return (List<T>) query.getResultList();
+        return pageByHql(hql,params,0,0).getContent();
+    }
+
+    public Page<T> pageByHql(final String hql, final Integer page, final Integer size){
+        return pageByHql(hql,null,page,size);
     }
 
     public Page<T> pageByHql(final String hql, final Map params, final Integer page, final Integer size) {
-        Query query = em.createQuery(hql);
-        PageRequest pageRequest = new PageRequest(page, size);
+        return pageByHql(hql,params,page,size,null);
+    }
+
+    public Page<T> pageByHql(final String hql, final Map params, final Integer page, final Integer size,final Sort sort){
+        StringBuilder sqlBuilder = new StringBuilder(hql);
+        PageRequest pageRequest;
+        List list;
+        Integer count;
+
+        //排序
+        if(sort != null){
+            int i = 0;
+            for (Sort.Order order : sort) {
+                if(i==0){
+                    sqlBuilder.append(" order by "+order.getProperty()+" "+order.getDirection().name()+" ");
+                }else{
+                    sqlBuilder.append(","+order.getProperty()+" "+order.getDirection().name()+" ");
+                }
+                i++;
+            }
+        }
+
+        Query query = em.createQuery(sqlBuilder.toString());
+        //参数
         if (params != null && params.size() > 0) {
             for (Object key : params.keySet()) {
                 query.setParameter(key.toString(), params.get(key));
             }
         }
+
         if(page>0 && size>0){
             query.setFirstResult((page - 1) * size);
             query.setMaxResults(size);
+
+            list= query.getResultList();
+            count = count(hql,params).intValue();
+            pageRequest = new PageRequest(page, size);
         }else{
-            pageRequest = new PageRequest(1,Integer.MAX_VALUE);
+            list= query.getResultList();
+            count = list.size();
+            pageRequest = new PageRequest(1,count);
         }
-        List<T> list = query.getResultList();
-        return new PageImpl<T>(list,pageRequest,count(hql,params));
+        return new PageImpl<T>(list,pageRequest,count);
     }
 
     public Long count(final String hql, final Map params) {
@@ -58,14 +101,11 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
                 query.setParameter(key.toString(), params.get(key));
             }
         }
-        Long count = (Long)query.getSingleResult();
-        return count;
+        return (Long)query.getSingleResult();
     }
 
-    *//**
-     * 获取HQL的count(*)
-     *//*
-    protected String prepareCountHql(final String HQL) {
+    //获取HQL的count(*)
+    private String prepareCountHql(final String HQL) {
         String fromHql = HQL;
         fromHql = "from" + StringUtils.substringAfter(fromHql, "from");
         fromHql = StringUtils.substringBefore(fromHql, "order by");
@@ -80,7 +120,6 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
                 fromHql = StringUtils.substringBefore(fromHql, "left");
             }
         }
-        String countHql = "select count(*) " + fromHql;
-        return countHql;
-    }*/
+        return "select count(*) " + fromHql;
+    }
 }
