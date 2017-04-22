@@ -12,6 +12,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 开发者
+ * nickName:大黄蜂
+ * email:245655812@qq.com
+ * github:https://github.com/bigbeef
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
