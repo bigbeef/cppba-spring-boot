@@ -31,6 +31,6 @@ public class UserServiceImpl implements UserService {
         Sort sort = new Sort(order1,order2);
         Page page = userRepository.pageByHql("from User u",null,1,1,sort);
 
-        return userRepository.findOne(id);
+        return userRepository.getOne(id);
     }
 }

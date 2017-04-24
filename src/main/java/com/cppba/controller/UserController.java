@@ -32,4 +32,10 @@ public class UserController {
         User user = userService.get(id);
         return user;
     }
+
+    @RequestMapping("/")
+    @ResponseBody
+    public String index(HttpServletRequest request, HttpServletResponse response, Model model){
+        return "index";
+    }
 }
