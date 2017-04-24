@@ -1,6 +1,6 @@
-package base.factory;
+package com.cppba.base.factory;
 
-import base.dao.impl.BaseRepositoryImpl;
+import com.cppba.base.dao.impl.BaseRepositoryImpl;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;

@@ -1,4 +1,4 @@
-package base.entity;
+package com.cppba.base.entity;
 
 import lombok.Data;
 

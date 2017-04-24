@@ -1,8 +1,8 @@
 package com.cppba.controller;
 
-import base.bean.JModelAndView;
-import com.cppba.entity.User;
+import com.cppba.base.bean.JModelAndView;
 import com.cppba.service.UserService;
+import com.cppba.entity.User;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

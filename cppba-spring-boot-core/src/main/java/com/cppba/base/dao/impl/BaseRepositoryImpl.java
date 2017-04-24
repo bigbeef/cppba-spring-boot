@@ -1,6 +1,6 @@
-package base.dao.impl;
+package com.cppba.base.dao.impl;
 
-import base.dao.BaseRepository;
+import com.cppba.base.dao.BaseRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

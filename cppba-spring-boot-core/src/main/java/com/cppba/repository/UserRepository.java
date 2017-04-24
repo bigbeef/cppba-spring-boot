@@ -1,7 +1,7 @@
 package com.cppba.repository;
 
 
-import base.dao.BaseRepository;
+import com.cppba.base.dao.BaseRepository;
 import com.cppba.entity.User;
 import com.cppba.repository.custom.UserRepositoryCustom;
 

@@ -1,6 +1,6 @@
-package base.bean;
+package com.cppba.base.bean;
 
-import base.constant.Globals;
+import com.cppba.base.constant.Globals;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

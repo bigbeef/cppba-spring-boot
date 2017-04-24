@@ -1,4 +1,4 @@
-package base.dao;
+package com.cppba.base.dao;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;

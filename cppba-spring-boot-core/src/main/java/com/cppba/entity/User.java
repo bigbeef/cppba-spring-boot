@@ -1,6 +1,6 @@
 package com.cppba.entity;
 
-import base.entity.BaseEntity;
+import com.cppba.base.entity.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Column;

@@ -1,4 +1,4 @@
-package base.constant;
+package com.cppba.base.constant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
