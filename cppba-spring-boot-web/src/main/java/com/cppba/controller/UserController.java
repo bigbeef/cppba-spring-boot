@@ -1,8 +1,8 @@
 package com.cppba.controller;
 
 import com.cppba.base.bean.JModelAndView;
-import com.cppba.service.UserService;
 import com.cppba.entity.User;
+import com.cppba.service.UserService;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,17 +27,17 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @RequestMapping
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, ModelMap map) {
+        map.put("hello", "from TemplateController.helloHtml");
+        return new JModelAndView("index", map, request);
+    }
+
     @RequestMapping("/getById/{id}")
     @ResponseBody
     public User getById(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable Long id){
+                        @PathVariable Long id) {
         User user = userService.get(id);
         return user;
-    }
-
-    @RequestMapping("/")
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response,ModelMap map){
-        map.put("hello","from TemplateController.helloHtml");
-        return new JModelAndView("index",map,request);
     }
 }

@@ -35,4 +35,10 @@ public class Globals {
 
     //前端模板文件夹
     public final static String TEMPLATE_TYPE = "default";
+
+    //通用静态资源地址,如:jquery、bootstrap
+    public final static String STATIC_PUBLIC_URL = "http://127.0.0.1/public-static";
+
+    //项目资源地址
+    public final static String STATIC_PRIVATE_URL = "http://127.0.0.1/cppba-spring-boot-static";
 }
