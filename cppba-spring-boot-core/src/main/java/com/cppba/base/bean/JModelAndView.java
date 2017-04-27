@@ -35,7 +35,7 @@ public class JModelAndView extends ModelAndView {
         //当前项目根地址
         String path = request.getContextPath();
         String webPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-        this.addObject("webPath", webPath);
+        this.addObject("web_path", webPath);
         //通用静态资源地址,如:jquery、bootstrap
         this.addObject("static_public_url", Globals.STATIC_PUBLIC_URL);
         //项目资源地址
