@@ -11,7 +11,6 @@
         <module>cppba-spring-boot-core</module>
         <module>cppba-spring-boot-api</module>
         <module>cppba-spring-boot-service</module>
-        <module>cppba-spring-boot-api</module>
     </modules>
 
     <name>cppba-spring-boot</name>

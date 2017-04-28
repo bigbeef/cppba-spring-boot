@@ -16,3 +16,26 @@ cppba-spring-boot-web  web项目代码
 cppba-spring-boot-static  项目私有静态资源（需要nginx映射）
 
 public-static  通用的静态资源（需要nginx映射），如:jquery、bootstrap
+
+## 3.不同环境打包
+application.properties 中定义当前环境(dev-开发,test-测试,prod-生产)
+
+application-dev.properties 开发环境配置
+
+application-test.properties 测试环境配置
+
+application-prod.properties 生产环境配置
+
+其中application.properties的配置如下：
+```xml
+###打包时只需要修改spring.profiles.active参数，决定环境
+
+#表示当前是开发环境，读取application-dev.properties配置文件
+spring.profiles.active=dev
+
+#表示当前是测试环境，读取application-test.properties配置文件
+spring.profiles.active=test
+
+#表示当前是生产环境，读取application-prod.properties配置文件
+spring.profiles.active=prod
+```
