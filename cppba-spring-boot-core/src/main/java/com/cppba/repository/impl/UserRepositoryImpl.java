@@ -1,14 +1,11 @@
 package com.cppba.repository.impl;
 
 
-import com.cppba.entity.User;
 import com.cppba.repository.custom.UserRepositoryCustom;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.List;
 
 /**
  * 开发者
@@ -23,11 +20,4 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     @PersistenceContext
     private EntityManager em;
 
-    @Override
-    public List<User> findByUserNameAndPassword(String userName,String password) {
-        Query query = em.createQuery("from User where userName = :userName and password = :password");
-        query.setParameter("userName",userName);
-        query.setParameter("password",password);
-        return query.getResultList();
-    }
 }

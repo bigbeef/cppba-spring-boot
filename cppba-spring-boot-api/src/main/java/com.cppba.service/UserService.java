@@ -1,9 +1,9 @@
 package com.cppba.service;
 
 
-import com.cppba.entity.User;
+import com.cppba.base.bean.Result;
 
 public interface UserService {
 
-    User get(Long id);
+    Result login(String UserName, String password) throws Exception;
 }

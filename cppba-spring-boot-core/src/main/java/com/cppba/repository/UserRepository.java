@@ -5,8 +5,6 @@ import com.cppba.base.dao.BaseRepository;
 import com.cppba.entity.User;
 import com.cppba.repository.custom.UserRepositoryCustom;
 
-import java.util.List;
-
 /**
  * 开发者
  * nickName:大黄蜂
@@ -17,6 +15,6 @@ import java.util.List;
 public interface UserRepository extends BaseRepository<User, Long>, UserRepositoryCustom {
 
     //spring data jpa 自动生成sql
-    List<User> findByUserNameOrPassword(String userName, String password);
+    User getByUserName(String userName);
 
 }

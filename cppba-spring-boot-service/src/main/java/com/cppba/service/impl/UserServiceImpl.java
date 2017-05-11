@@ -1,12 +1,14 @@
 package com.cppba.service.impl;
 
+import com.cppba.base.bean.Result;
+import com.cppba.base.util.MD5Utils;
+import com.cppba.base.util.Results;
 import com.cppba.entity.User;
+import com.cppba.repository.UserRepository;
 import com.cppba.service.UserService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.cppba.repository.UserRepository;
 
 import javax.annotation.Resource;
 
@@ -25,12 +27,15 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User get(Long id) {
-        Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "u.id");
-        Sort.Order order2 = new Sort.Order(Sort.Direction.DESC, "u.userName");
-        Sort sort = new Sort(order1, order2);
-        Page page = userRepository.pageByHql("from User u", null, 1, 1, sort);
-
-        return userRepository.getOne(id);
+    public Result login(String UserName, String password) throws Exception {
+        User user = userRepository.getByUserName(UserName);
+        if (user == null) {
+            return Results.failure("用户不存在！");
+        }
+        String Md5Password= MD5Utils.encode32Md5(password);
+        if (!StringUtils.equals(user.getPassword(), Md5Password)) {
+            return Results.failure("密码不正确！");
+        }
+        return Results.success("登录成功！");
     }
 }
