@@ -14,7 +14,8 @@ import com.cppba.repository.custom.UserRepositoryCustom;
 //同时继承base和自定义repository,自定义接口实现命名必须以此接口名加后缀
 public interface UserRepository extends BaseRepository<User, Long>, UserRepositoryCustom {
 
-    //spring data jpa 自动生成sql
     User getByUserName(String userName);
+
+    User getById(Long id);
 
 }

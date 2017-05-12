@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.security.MessageDigest;
 
-public class MD5Utils {
+public class MD5Util {
     /**
      * Md5 32位小写 加密
      * @param source

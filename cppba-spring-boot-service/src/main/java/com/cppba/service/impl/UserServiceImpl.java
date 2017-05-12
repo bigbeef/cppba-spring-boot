@@ -1,7 +1,9 @@
 package com.cppba.service.impl;
 
 import com.cppba.base.bean.Result;
-import com.cppba.base.util.MD5Utils;
+import com.cppba.base.bean.UserJwt;
+import com.cppba.base.util.JwtUtil;
+import com.cppba.base.util.MD5Util;
 import com.cppba.base.util.Results;
 import com.cppba.entity.User;
 import com.cppba.repository.UserRepository;
@@ -32,10 +34,24 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return Results.failure("用户不存在！");
         }
-        String Md5Password= MD5Utils.encode32Md5(password);
+        String Md5Password= MD5Util.encode32Md5(password);
         if (!StringUtils.equals(user.getPassword(), Md5Password)) {
             return Results.failure("密码不正确！");
         }
-        return Results.success("登录成功！");
+        UserJwt userJwt = new UserJwt();
+        userJwt.setId(user.getId());
+        userJwt.setUserName(user.getUserName());
+        userJwt.setRoles(new String[]{"admin"});
+        String token = JwtUtil.createJwt(userJwt);
+        return Results.successWithData(token,"登录成功！");
+    }
+
+    @Override
+    public Result getById(Long id) {
+        User user = userRepository.getById(id);
+        if(user == null){
+            return Results.failure("用户不存在");
+        }
+        return Results.successWithData(user);
     }
 }

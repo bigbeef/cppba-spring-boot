@@ -55,6 +55,12 @@
             <artifactId>druid</artifactId>
             <version>1.0.27</version>
         </dependency>
+        <!--aliyun-oss-->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>2.2.3</version>
+        </dependency>
         <!-- commons-configuration2 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -90,6 +96,23 @@
             <groupId>org.lazyluke</groupId>
             <artifactId>log4jdbc-remix</artifactId>
             <version>0.2.7</version>
+        </dependency>
+        <!--mail-->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+        </dependency>
+        <!-- 谷歌二维码 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <!--jwt-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.1.0</version>
         </dependency>
     </dependencies>
 
