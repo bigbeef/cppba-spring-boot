@@ -8,11 +8,13 @@ import com.cppba.base.util.Results;
 import com.cppba.entity.User;
 import com.cppba.repository.UserRepository;
 import com.cppba.service.UserService;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 
 /**
@@ -41,9 +43,12 @@ public class UserServiceImpl implements UserService {
         UserJwt userJwt = new UserJwt();
         userJwt.setId(user.getId());
         userJwt.setUserName(user.getUserName());
-        userJwt.setRoles(new String[]{"admin"});
+        userJwt.setRoles(new String[]{"login"});
         String token = JwtUtil.createJwt(userJwt);
-        return Results.successWithData(token,"登录成功！");
+        Map map = Maps.newHashMap();
+        map.put("token",token);
+        map.put("user",user);
+        return Results.successWithData(map,"登录成功！");
     }
 
     @Override
@@ -53,5 +58,20 @@ public class UserServiceImpl implements UserService {
             return Results.failure("用户不存在");
         }
         return Results.successWithData(user);
+    }
+
+    @Override
+    public Result update(Long id, String nickName, String title, String keyword, String description, String remark) {
+        User user = userRepository.getOne(id);
+        if(user == null){
+            return Results.failure("用户不存在");
+        }
+        user.setNickName(nickName);
+        user.setTitle(title);
+        user.setKeyword(keyword);
+        user.setDescription(description);
+        user.setRemark(remark);
+        userRepository.save(user);
+        return Results.success("修改成功");
     }
 }

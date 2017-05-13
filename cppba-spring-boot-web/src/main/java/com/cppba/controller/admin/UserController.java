@@ -39,9 +39,17 @@ public class UserController extends BaseController {
 
     @RequestMapping("/get")
     @ResponseBody
-    @RequiresRoles({"admin"})
+    @RequiresRoles({"login"})
     public Result get(HttpServletRequest request) {
         UserJwt userJwt = getCurrentUser(request);
         return userService.getById(userJwt.getId());
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    @RequiresRoles({"login"})
+    public Result update(HttpServletRequest request,String nickName,String title,String keyword,String description,String remark) {
+        UserJwt userJwt = getCurrentUser(request);
+        return userService.update(userJwt.getId(),nickName,title,keyword,description,remark);
     }
 }
