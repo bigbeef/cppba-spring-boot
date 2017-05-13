@@ -6,8 +6,10 @@ import com.cppba.base.util.JwtUtil;
 import com.cppba.base.util.MD5Util;
 import com.cppba.base.util.Results;
 import com.cppba.entity.User;
+import com.cppba.form.admin.SettingForm;
 import com.cppba.repository.UserRepository;
 import com.cppba.service.UserService;
+import com.cppba.vo.admin.SettingVO;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -52,25 +54,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result getById(Long id) {
+    public Result setting(Long id) {
         User user = userRepository.getById(id);
         if(user == null){
             return Results.failure("用户不存在");
         }
-        return Results.successWithData(user);
+        SettingVO settingVO = new SettingVO(user.getNickName(),user.getRemark(),user.getTitle(),user.getKeyword(),user.getDescription());
+        return Results.successWithData(settingVO);
     }
 
     @Override
-    public Result update(Long id, String nickName, String title, String keyword, String description, String remark) {
-        User user = userRepository.getOne(id);
+    public Result settingUpdate(Long id, SettingForm settingFrom) {
+        User user = userRepository.getById(id);
         if(user == null){
             return Results.failure("用户不存在");
         }
-        user.setNickName(nickName);
-        user.setTitle(title);
-        user.setKeyword(keyword);
-        user.setDescription(description);
-        user.setRemark(remark);
+        user.setNickName(settingFrom.getNickName());
+        user.setTitle(settingFrom.getTitle());
+        user.setKeyword(settingFrom.getKeyword());
+        user.setDescription(settingFrom.getDescription());
+        user.setRemark(settingFrom.getRemark());
         userRepository.save(user);
         return Results.success("修改成功");
     }

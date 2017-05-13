@@ -5,8 +5,10 @@ import com.cppba.base.bean.Result;
 import com.cppba.base.bean.UserJwt;
 import com.cppba.base.util.Results;
 import com.cppba.controller.base.BaseController;
+import com.cppba.form.admin.SettingForm;
 import com.cppba.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,8 +28,9 @@ public class UserController extends BaseController {
     @Resource
     private UserService userService;
 
-    @RequestMapping("/login")
+
     @ResponseBody
+    @RequestMapping("/login")
     public Result login(String userName, String password) {
         try {
             return userService.login(userName,password);
@@ -37,19 +40,21 @@ public class UserController extends BaseController {
         }
     }
 
-    @RequestMapping("/get")
+
     @ResponseBody
     @RequiresRoles({"login"})
-    public Result get(HttpServletRequest request) {
+    @RequestMapping("/setting")
+    public Result setting(HttpServletRequest request) {
         UserJwt userJwt = getCurrentUser(request);
-        return userService.getById(userJwt.getId());
+        return userService.setting(userJwt.getId());
     }
 
-    @RequestMapping("/update")
+
     @ResponseBody
     @RequiresRoles({"login"})
-    public Result update(HttpServletRequest request,String nickName,String title,String keyword,String description,String remark) {
+    @RequestMapping(value="/setting/update",method = RequestMethod.POST)
+    public Result settingUpdate(HttpServletRequest request, SettingForm settingFrom) {
         UserJwt userJwt = getCurrentUser(request);
-        return userService.update(userJwt.getId(),nickName,title,keyword,description,remark);
+        return userService.settingUpdate(userJwt.getId(),settingFrom);
     }
 }

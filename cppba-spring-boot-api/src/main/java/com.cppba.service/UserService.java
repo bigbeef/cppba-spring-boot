@@ -2,12 +2,13 @@ package com.cppba.service;
 
 
 import com.cppba.base.bean.Result;
+import com.cppba.form.admin.SettingForm;
 
 public interface UserService {
 
     Result login(String UserName, String password) throws Exception;
 
-    Result getById(Long id);
+    Result setting(Long id);
 
-    Result update(Long id,String nickName,String title,String keyword,String description,String remark);
+    Result settingUpdate(Long id,SettingForm settingFrom);
 }
