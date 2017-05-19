@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
-import com.cppba.base.bean.UserJwt;
+import com.cppba.base.bean.CurrentUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JwtUtil {
@@ -18,9 +18,9 @@ public class JwtUtil {
      * @return
      * @throws Exception
      */
-    public static String createJwt(UserJwt userJwt) throws Exception{
+    public static String createJwt(CurrentUser currentUser) throws Exception{
         ObjectMapper objectMapper = new ObjectMapper();
-        String jwtString = objectMapper.writeValueAsString(userJwt);
+        String jwtString = objectMapper.writeValueAsString(currentUser);
         JWTCreator.Builder builder = JWT.create();
         builder.withClaim("user",jwtString);
         return builder.sign(Algorithm.HMAC256(secret));
@@ -32,12 +32,12 @@ public class JwtUtil {
      * @return
      * @throws Exception
      */
-    public static UserJwt decodeJwt(String token) throws Exception{
+    public static CurrentUser decodeJwt(String token) throws Exception{
         JWT decode = JWT.decode(token);
         Claim user = decode.getClaim("user");
         String userString = user.as(String.class);
         ObjectMapper objectMapper = new ObjectMapper();
-        UserJwt userJwt = objectMapper.readValue(userString,UserJwt.class);
+        CurrentUser userJwt = objectMapper.readValue(userString,CurrentUser.class);
         return userJwt;
     }
 

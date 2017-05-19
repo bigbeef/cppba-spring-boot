@@ -3,7 +3,7 @@ package com.cppba.base.bean;
 import lombok.Data;
 
 @Data
-public class UserJwt{
+public class CurrentUser{
 
     private Long id;
 

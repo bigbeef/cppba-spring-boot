@@ -1,7 +1,7 @@
 package com.cppba.service.impl;
 
+import com.cppba.base.bean.CurrentUser;
 import com.cppba.base.bean.Result;
-import com.cppba.base.bean.UserJwt;
 import com.cppba.base.util.JwtUtil;
 import com.cppba.base.util.MD5Util;
 import com.cppba.base.util.Results;
@@ -42,11 +42,11 @@ public class UserServiceImpl implements UserService {
         if (!StringUtils.equals(user.getPassword(), Md5Password)) {
             return Results.failure("密码不正确！");
         }
-        UserJwt userJwt = new UserJwt();
-        userJwt.setId(user.getId());
-        userJwt.setUserName(user.getUserName());
-        userJwt.setRoles(new String[]{"login"});
-        String token = JwtUtil.createJwt(userJwt);
+        CurrentUser currentUser = new CurrentUser();
+        currentUser.setId(user.getId());
+        currentUser.setUserName(user.getUserName());
+        currentUser.setRoles(new String[]{"login"});
+        String token = JwtUtil.createJwt(currentUser);
         Map map = Maps.newHashMap();
         map.put("token",token);
         map.put("user",user);

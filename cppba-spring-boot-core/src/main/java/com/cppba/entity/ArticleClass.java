@@ -3,9 +3,7 @@ package com.cppba.entity;
 import com.cppba.base.entity.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 开发者
@@ -25,4 +23,8 @@ public class ArticleClass extends BaseEntity {
 
     @Column(name = "sort")
     private String sort;
+
+    /*@ManyToOne
+    @JoinColumn(name = "user_id", table = "user", updatable = false, insertable = false)
+    private User user;*/
 }

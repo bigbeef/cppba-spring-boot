@@ -2,7 +2,6 @@ package com.cppba.base.dao;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
@@ -16,7 +15,8 @@ import java.util.Map;
  * github:https://github.com/bigbeef
  */
 @NoRepositoryBean
-public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
+public interface BaseRepository<T, ID extends Serializable> {
+
     int executeUpdate(String hql);
 
     List<T> findByHql(final String hql);

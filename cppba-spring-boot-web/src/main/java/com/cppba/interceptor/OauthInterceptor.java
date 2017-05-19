@@ -1,8 +1,8 @@
 package com.cppba.interceptor;
 
 import com.cppba.base.annotation.RequiresRoles;
+import com.cppba.base.bean.CurrentUser;
 import com.cppba.base.bean.Result;
-import com.cppba.base.bean.UserJwt;
 import com.cppba.base.util.CommonUtil;
 import com.cppba.base.util.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -55,9 +55,9 @@ public class OauthInterceptor implements HandlerInterceptor {
         }
 
         //解码用户信息
-        UserJwt userJwt = JwtUtil.decodeJwt(token);
+        CurrentUser currentUser = JwtUtil.decodeJwt(token);
         //System.out.println("userJwt:"+userJwt.toString());
-        String[] roles = userJwt.getRoles();
+        String[] roles = currentUser.getRoles();
         List<String> rolesList = Arrays.asList(roles);
 
         //是否包含角色权限注解
@@ -76,7 +76,7 @@ public class OauthInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        request.setAttribute("user",userJwt);
+        request.setAttribute("user",currentUser);
         return true;
     }
 

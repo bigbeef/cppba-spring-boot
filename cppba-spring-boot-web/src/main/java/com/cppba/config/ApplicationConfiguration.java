@@ -19,6 +19,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry){
+        //权限拦截器
         registry.addInterceptor(new OauthInterceptor()).addPathPatterns("/**");
     }
 
@@ -37,6 +38,10 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
         return new CorsFilter(source);
     }
 
+    /**
+     * 文件上传
+     * @return
+     */
     @Bean
     public CommonsMultipartResolver multipartResolver(){
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();

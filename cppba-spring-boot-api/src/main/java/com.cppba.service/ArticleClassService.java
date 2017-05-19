@@ -1,6 +1,8 @@
 package com.cppba.service;
 
 
-public interface ArticleClassService {
+import com.cppba.base.bean.Result;
 
+public interface ArticleClassService {
+    Result page(Long userId, String name, Integer pageNumber, Integer pageSize);
 }

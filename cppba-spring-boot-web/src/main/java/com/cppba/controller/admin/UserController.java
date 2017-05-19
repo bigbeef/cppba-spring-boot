@@ -1,8 +1,8 @@
 package com.cppba.controller.admin;
 
 import com.cppba.base.annotation.RequiresRoles;
+import com.cppba.base.bean.CurrentUser;
 import com.cppba.base.bean.Result;
-import com.cppba.base.bean.UserJwt;
 import com.cppba.base.util.Results;
 import com.cppba.controller.base.BaseController;
 import com.cppba.form.admin.SettingForm;
@@ -45,8 +45,8 @@ public class UserController extends BaseController {
     @RequiresRoles({"login"})
     @RequestMapping("/setting")
     public Result setting(HttpServletRequest request) {
-        UserJwt userJwt = getCurrentUser(request);
-        return userService.setting(userJwt.getId());
+        CurrentUser currentUser = getCurrentUser(request);
+        return userService.setting(currentUser.getId());
     }
 
 
@@ -54,7 +54,7 @@ public class UserController extends BaseController {
     @RequiresRoles({"login"})
     @RequestMapping(value="/setting/update",method = RequestMethod.POST)
     public Result settingUpdate(HttpServletRequest request, SettingForm settingFrom) {
-        UserJwt userJwt = getCurrentUser(request);
-        return userService.settingUpdate(userJwt.getId(),settingFrom);
+        CurrentUser currentUser = getCurrentUser(request);
+        return userService.settingUpdate(currentUser.getId(),settingFrom);
     }
 }

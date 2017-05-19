@@ -6,9 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
@@ -20,15 +20,10 @@ import java.util.Map;
  * email:245655812@qq.com
  * github:https://github.com/bigbeef
  */
-public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T,ID>
-        implements BaseRepository<T,ID> {
+public class BaseRepositoryImpl<T, ID extends Serializable> implements BaseRepository<T,ID> {
 
-    private final EntityManager em;
-
-    public BaseRepositoryImpl(Class<T> domainClass, EntityManager em) {
-        super(domainClass, em);
-        this.em = em;
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     public int executeUpdate(String hql){
         Query query = em.createQuery(hql);

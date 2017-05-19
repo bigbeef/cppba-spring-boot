@@ -1,12 +1,11 @@
 package com.cppba;
 
-import com.cppba.base.factory.BaseRepositoryFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories(repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
+@EnableJpaRepositories/*(repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)*/
 // same as @Configuration @EnableAutoConfiguration @ComponentScan
 @SpringBootApplication
 //WebFilter,WebServlet,WebListener

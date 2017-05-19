@@ -1,11 +1,11 @@
 package com.cppba.controller.base;
 
-import com.cppba.base.bean.UserJwt;
+import com.cppba.base.bean.CurrentUser;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class BaseController {
-    public UserJwt getCurrentUser(HttpServletRequest request){
-        return (UserJwt) request.getAttribute("user");
+    public CurrentUser getCurrentUser(HttpServletRequest request){
+        return (CurrentUser) request.getAttribute("user");
     }
 }
