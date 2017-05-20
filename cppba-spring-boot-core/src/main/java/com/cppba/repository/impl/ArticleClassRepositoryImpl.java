@@ -22,16 +22,17 @@ import java.util.HashMap;
 public class ArticleClassRepositoryImpl extends BaseRepositoryImpl<ArticleClass,Long> implements ArticleClassRepositoryCustom {
 
     public Page<ArticleClass> page(Long userId, String name, Integer pageNumber, Integer pageSize){
-        String HQL = "select ac from ArticleClass ac where 1=1";
+        String HQL = "select ac from ArticleClass ac where 1=1 and ac.deleteStatus=0 ";
         HashMap<String, Object> params = Maps.newHashMap();
-        /*if(userId != null){
+        if(userId != null){
             HQL += " and ac.user.id = :userId ";
             params.put("userId",userId);
-        }*/
+        }
         if(StringUtils.isNotBlank(name)){
             HQL += " and ac.name like :name ";
-            params.put("name",name);
+            params.put("name","%"+name+"%");
         }
+        HQL += " order by ac.sort";
         return this.pageByHql(HQL,params,pageNumber,pageSize);
     }
 

@@ -1,6 +1,7 @@
 package com.cppba.entity;
 
 import com.cppba.base.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class ArticleClass extends BaseEntity {
     @Column(name = "sort")
     private String sort;
 
-    /*@ManyToOne
-    @JoinColumn(name = "user_id", table = "user", updatable = false, insertable = false)
-    private User user;*/
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", updatable = false, insertable = false)
+    private User user;
 }
